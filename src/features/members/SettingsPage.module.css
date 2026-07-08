@@ -1,0 +1,143 @@
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 20px;
+}
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 16px;
+}
+
+.tab,
+.tabActive {
+  padding: 7px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.tab:hover {
+  background: var(--grey1);
+}
+
+.tabActive {
+  background: var(--accent-subtle);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 20px;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.field input,
+.field textarea {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-subtle);
+  outline: none;
+  resize: vertical;
+}
+
+.field input:focus,
+.field textarea:focus {
+  border-color: var(--accent);
+  background: var(--bg-surface);
+}
+
+.field input:disabled,
+.field textarea:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.save {
+  padding: 8px 14px;
+  background: var(--accent);
+  color: var(--white1);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.save:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.save:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.dangerZone {
+  border: 1px solid var(--danger);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.dangerZone h4 {
+  color: var(--danger);
+  font-size: 13px;
+}
+
+.delete {
+  align-self: flex-start;
+  padding: 8px 14px;
+  border: 1px solid var(--danger);
+  color: var(--danger);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.delete:hover:not(:disabled) {
+  background: var(--danger-subtle);
+}
+
+.error {
+  color: var(--danger);
+  font-size: 13px;
+  background: var(--danger-subtle);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+}
+
+.success {
+  color: var(--success);
+  font-size: 13px;
+}
+
+.muted {
+  color: var(--text-secondary);
+  font-weight: 400;
+  font-size: 13px;
+}

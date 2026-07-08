@@ -1,0 +1,152 @@
+.layout {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-app);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  height: var(--navbar-height);
+  padding: 0 20px;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.back {
+  font-size: 16px;
+  color: var(--text-secondary);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.back:hover {
+  background: var(--bg-subtle);
+  color: var(--text-primary);
+}
+
+.key {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--accent-subtle);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.name {
+  font-size: 15px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.roleBadge {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1px 8px;
+  white-space: nowrap;
+}
+
+.tabs {
+  display: flex;
+  gap: 4px;
+}
+
+.tab {
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.tab:hover {
+  background: var(--bg-subtle);
+}
+
+.tabActive {
+  background: var(--accent-subtle);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.newIssue {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  background: var(--accent);
+  color: var(--white1);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.newIssue:hover {
+  background: var(--accent-hover);
+}
+
+.newIssue img {
+  filter: brightness(0) invert(1);
+}
+
+.email {
+  color: var(--text-secondary);
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.signOut {
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.signOut:hover {
+  background: var(--bg-subtle);
+}
+
+.main {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+
+.centered {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--text-secondary);
+}
+
+.backLink {
+  color: var(--accent);
+}

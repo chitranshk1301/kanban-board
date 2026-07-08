@@ -1,0 +1,15 @@
+.page {
+  padding: 16px 20px;
+}
+
+.state {
+  padding: 40px;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.stateError {
+  padding: 40px;
+  text-align: center;
+  color: var(--danger);
+}

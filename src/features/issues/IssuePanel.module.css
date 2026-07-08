@@ -1,0 +1,345 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 90;
+}
+
+.panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(520px, 92vw);
+  background: var(--bg-surface);
+  box-shadow: var(--shadow-lg);
+  z-index: 95;
+  overflow-y: auto;
+}
+
+.content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.notFound {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.topBar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.issueKey {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--accent-subtle);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.readOnly {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1px 8px;
+}
+
+.topActions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.delete {
+  color: var(--danger);
+  font-size: 13px;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+}
+
+.delete:hover {
+  background: var(--danger-subtle);
+}
+
+.close {
+  font-size: 22px;
+  line-height: 1;
+  color: var(--text-secondary);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.close:hover {
+  background: var(--bg-subtle);
+  color: var(--text-primary);
+}
+
+.titleInput {
+  font-size: 18px;
+  font-weight: 600;
+  padding: 8px 10px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  width: 100%;
+  outline: none;
+}
+
+.titleInput:hover,
+.titleInput:focus {
+  border-color: var(--border);
+  background: var(--bg-subtle);
+}
+
+.titleStatic {
+  font-size: 18px;
+  font-weight: 600;
+  padding: 8px 10px;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fieldRow {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+}
+
+.fieldRow > span:first-child {
+  color: var(--text-secondary);
+}
+
+.fieldRow select {
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface);
+  font-size: 13px;
+  max-width: 240px;
+}
+
+.fieldRow select:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.labels {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.labelWrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.labelRemove {
+  color: var(--text-secondary);
+  font-size: 14px;
+  padding: 0 4px;
+  border-radius: var(--radius-sm);
+}
+
+.labelRemove:hover {
+  color: var(--danger);
+}
+
+.labelInput {
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+  padding: 2px 8px;
+  font-size: 12px;
+  width: 90px;
+  outline: none;
+  background: transparent;
+}
+
+.labelInput:focus {
+  border-color: var(--accent);
+}
+
+.person {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section {
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.section h3 {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+}
+
+.description {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-subtle);
+  resize: vertical;
+  outline: none;
+}
+
+.description:focus {
+  border-color: var(--accent);
+  background: var(--bg-surface);
+}
+
+.descriptionStatic {
+  white-space: pre-wrap;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.descActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.comments {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.comment {
+  background: var(--bg-subtle);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+}
+
+.commentHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.commentAuthor {
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.commentTime {
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.commentDelete {
+  margin-left: auto;
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.commentDelete:hover {
+  color: var(--danger);
+}
+
+.commentBody {
+  font-size: 13px;
+  white-space: pre-wrap;
+  line-height: 1.5;
+}
+
+.commentForm {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.commentForm textarea {
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-subtle);
+  resize: vertical;
+  outline: none;
+}
+
+.commentForm textarea:focus {
+  border-color: var(--accent);
+  background: var(--bg-surface);
+}
+
+.commentForm button {
+  align-self: flex-end;
+}
+
+.save {
+  padding: 7px 14px;
+  background: var(--accent);
+  color: var(--white1);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.save:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.save:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.cancel {
+  padding: 7px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+}
+
+.cancel:hover {
+  background: var(--bg-subtle);
+}
+
+.error {
+  color: var(--danger);
+  font-size: 13px;
+  background: var(--danger-subtle);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+}
+
+.muted {
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.timestamps {
+  color: var(--text-secondary);
+  font-size: 12px;
+}

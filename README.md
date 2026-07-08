@@ -1,70 +1,103 @@
-# Getting Started with Create React App
+# Kanban Board
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-stack, JIRA-style project management app: multiple projects, a drag-and-drop
+kanban **Board** view, a sortable **List** view, JIRA-like stacked filters, and
+**project-scoped RBAC** — all backed by [Supabase](https://supabase.com)
+(Postgres + Auth + Row Level Security).
 
-## Available Scripts
+**Stack:** Vite · React 19 · TypeScript · TanStack Query · @dnd-kit · react-router 7 · Supabase
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **Projects** with short keys (`DEMO-12` style issue numbering)
+- **Board view** — columns per status, drag-and-drop across and within columns
+  (fractional positioning, optimistic updates), group by status / assignee / priority
+- **List view** — sortable table (key, title, status, priority, assignee, updated)
+- **Filters** — text search + multi-select status / priority / assignee / labels;
+  the URL is the source of truth, so filtered views are shareable links
+- **Issue panel** — inline editing, labels, comments; deep-linkable via `?issue=N`
+- **RBAC (per project)** enforced by Postgres RLS, not just the UI:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+  | Action | viewer | member | manager | admin |
+  |---|:-:|:-:|:-:|:-:|
+  | Read project, issues, comments | ✔ | ✔ | ✔ | ✔ |
+  | Create issues, comment | | ✔ | ✔ | ✔ |
+  | Edit/move/delete **own** issues | | ✔ | ✔ | ✔ |
+  | Edit/move/delete **any** issue | | | ✔ | ✔ |
+  | Manage members & roles, edit/delete project | | | | ✔ |
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+  Any signed-in user can create a project and becomes its admin.
 
-### `npm test`
+## Setup
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 1. Supabase
 
-### `npm run build`
+Create (or reuse) a project at [supabase.com](https://supabase.com), then apply the
+migrations in `supabase/migrations/`:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```sh
+pnpm exec supabase login
+pnpm exec supabase link --project-ref <your-project-ref>
+pnpm exec supabase db push
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+(Alternatively paste the two SQL files into the Dashboard's SQL editor, in order.)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+> **Dev tip:** disable *Authentication → Sign In/Up → Confirm email* while
+> developing, or new sign-ups will have to go through email confirmation.
 
-### `npm run eject`
+### 2. Environment
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```sh
+cp .env.example .env
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Fill in `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`
+(Dashboard → Settings → API). `SUPABASE_SERVICE_ROLE_KEY` is only needed for
+seeding — never commit it or ship it to the client.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 3. Run
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```sh
+pnpm install
+pnpm dev
+```
 
-## Learn More
+### 4. Demo data (optional)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```sh
+pnpm seed
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Creates a `DEMO` project with ~20 issues and three users
+(password `password123`):
 
-### Code Splitting
+- `demo-admin@example.com` — admin
+- `demo-member@example.com` — member
+- `demo-viewer@example.com` — viewer
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Scripts
 
-### Analyzing the Bundle Size
+| Command | Purpose |
+|---|---|
+| `pnpm dev` | Start the dev server |
+| `pnpm build` | Typecheck + production build |
+| `pnpm preview` | Preview the production build |
+| `pnpm typecheck` | TypeScript only |
+| `pnpm gen:types` | Regenerate `src/lib/database.types.ts` from the linked project |
+| `pnpm seed` | Seed demo users/project/issues (needs service role key) |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Architecture notes
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- **No custom backend** — the client talks to Supabase directly; every table has
+  RLS enabled and the policies in
+  `supabase/migrations/20260708000002_rls_policies.sql` are the actual
+  permission enforcement. The `usePermissions` hook only mirrors them for UX.
+- Membership lookups inside policies go through `SECURITY DEFINER` helper
+  functions (`has_project_role`, `is_project_member`) to avoid infinite RLS
+  recursion on `project_members`.
+- Kanban ordering uses a float `position` column with midpoint insertion —
+  one row updated per move. If a gap degenerates, the
+  `normalize_column_positions` RPC re-spaces the column.
+- Issue numbers (`DEMO-42`) come from a `BEFORE INSERT` trigger that
+  atomically increments `projects.next_issue_number`.

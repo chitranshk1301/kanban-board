@@ -1,0 +1,82 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  min-width: 0;
+}
+
+.field input,
+.field textarea,
+.field select {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-subtle);
+  outline: none;
+  resize: vertical;
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus {
+  border-color: var(--accent);
+  background: var(--bg-surface);
+}
+
+.error {
+  color: var(--danger);
+  font-size: 13px;
+  background: var(--danger-subtle);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.cancel {
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+}
+
+.cancel:hover {
+  background: var(--bg-subtle);
+}
+
+.submit {
+  padding: 8px 14px;
+  background: var(--accent);
+  color: var(--white1);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.submit:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.submit:disabled {
+  opacity: 0.6;
+  cursor: default;
+}

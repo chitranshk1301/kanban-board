@@ -1,0 +1,2 @@
+# Minimal config for the Supabase CLI (link + db push against the hosted project).
+project_id = "kanban-board"

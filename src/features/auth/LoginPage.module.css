@@ -1,0 +1,96 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-app);
+  padding: 24px;
+}
+
+.card {
+  width: 100%;
+  max-width: 380px;
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.field input {
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-subtle);
+  outline: none;
+}
+
+.field input:focus {
+  border-color: var(--accent);
+  background: var(--bg-surface);
+}
+
+.error {
+  color: var(--danger);
+  font-size: 13px;
+  background: var(--danger-subtle);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+}
+
+.notice {
+  color: var(--accent);
+  font-size: 13px;
+  background: var(--accent-subtle);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+}
+
+.submit {
+  margin-top: 4px;
+  padding: 10px;
+  background: var(--accent);
+  color: var(--white1);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+}
+
+.submit:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.submit:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.switchMode {
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.switchMode:hover {
+  color: var(--accent);
+}

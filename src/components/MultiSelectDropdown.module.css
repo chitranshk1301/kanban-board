@@ -1,0 +1,80 @@
+.root {
+  position: relative;
+}
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface);
+  font-size: 13px;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.trigger:hover {
+  background: var(--bg-subtle);
+}
+
+.trigger.active {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.count {
+  background: var(--accent);
+  color: var(--white1);
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  min-width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px;
+}
+
+.menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  min-width: 210px;
+  max-height: 280px;
+  overflow-y: auto;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: 6px;
+  z-index: 50;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 8px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.option:hover {
+  background: var(--bg-subtle);
+}
+
+.optionLabel {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.empty {
+  padding: 10px;
+  color: var(--text-secondary);
+  font-size: 13px;
+}
