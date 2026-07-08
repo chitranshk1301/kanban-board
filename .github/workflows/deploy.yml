@@ -37,4 +37,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Trigger Render deploy
-        run: curl -fsS "${{ secrets.RENDER_DEPLOY_HOOK }}" > /dev/null
+        env:
+          HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$HOOK" ]; then
+            echo "::error::RENDER_DEPLOY_HOOK secret is empty or missing. Add it under repo Settings → Secrets and variables → Actions → Repository secrets (exact name: RENDER_DEPLOY_HOOK)."
+            exit 1
+          fi
+          STATUS=$(curl -s -o /tmp/hook-response -w "%{http_code}" "$HOOK")
+          echo "Render responded with HTTP $STATUS"
+          cat /tmp/hook-response; echo
+          [ "$STATUS" -ge 200 ] && [ "$STATUS" -lt 300 ]
