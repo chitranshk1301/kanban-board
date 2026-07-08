@@ -1,0 +1,21 @@
+# Render Blueprint — https://render.com/docs/blueprint-spec
+# Create via: Render dashboard → New → Blueprint → select this repo.
+services:
+  - type: web
+    name: kanban-board
+    runtime: docker
+    plan: free
+    region: singapore
+    dockerfilePath: ./Dockerfile
+    # Deploys are triggered by GitHub Actions (deploy hook) after CI passes,
+    # not on every raw push.
+    autoDeploy: false
+    healthCheckPath: /healthz
+    # Render exposes env vars to the Docker build, where our Dockerfile
+    # declares them as ARGs. Both values are public by design (they ship
+    # in the JS bundle); RLS is the security boundary.
+    envVars:
+      - key: VITE_SUPABASE_URL
+        value: https://kzwbhrbbyawvjlyihioc.supabase.co
+      - key: VITE_SUPABASE_ANON_KEY
+        value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt6d2JocmJieWF3dmpseWloaW9jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM0NDY1OTQsImV4cCI6MjA5OTAyMjU5NH0.Ijd6T7v232S_vHPCNKSRWZpnS489HtGzdR67x_48hXo

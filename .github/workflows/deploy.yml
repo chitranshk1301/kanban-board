@@ -1,0 +1,40 @@
+name: CI & Deploy to Render
+
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: render-deploy
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Reads the pinned version from package.json "packageManager"
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm typecheck
+
+      # Both values are public by design (baked into the JS bundle).
+      - run: pnpm build
+        env:
+          VITE_SUPABASE_URL: https://kzwbhrbbyawvjlyihioc.supabase.co
+          VITE_SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt6d2JocmJieWF3dmpseWloaW9jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM0NDY1OTQsImV4cCI6MjA5OTAyMjU5NH0.Ijd6T7v232S_vHPCNKSRWZpnS489HtGzdR67x_48hXo
+
+  deploy:
+    needs: ci
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Render deploy
+        run: curl -fsS "${{ secrets.RENDER_DEPLOY_HOOK }}" > /dev/null

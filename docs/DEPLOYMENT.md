@@ -190,6 +190,37 @@ App Runner suffices.
 
 ---
 
+## 3C. Free alternative: Render + GitHub Actions (auto-deploy on commit)
+
+Zero cost, no credit card, same Docker image. Render builds the
+[`Dockerfile`](../Dockerfile) itself; GitHub Actions acts as the CI gate and
+triggers each deploy. Config: [`render.yaml`](../render.yaml) +
+[`.github/workflows/deploy.yml`](../.github/workflows/deploy.yml).
+
+One-time setup:
+
+1. Sign up at [render.com](https://render.com) with your GitHub account.
+2. **New → Blueprint** → select `chitranshk1301/kanban-board` → Render reads
+   `render.yaml` and creates the free web service.
+3. Open the service → **Settings → Deploy Hook** → copy the URL.
+4. GitHub repo → **Settings → Secrets and variables → Actions → New repository
+   secret** → name `RENDER_DEPLOY_HOOK`, paste the URL.
+
+From then on, every push to `main` runs typecheck + build in Actions and, only
+if they pass, triggers the Render deploy. The app is served at
+`https://kanban-board-<hash>.onrender.com` (custom domains are free:
+Settings → Custom Domains).
+
+Free-tier trade-offs, honestly:
+
+- The instance **spins down after ~15 idle minutes**; the next visitor waits
+  ~50s while it wakes. Fine for demos/portfolios; upgrade ($7/mo) or move to
+  §3A when that becomes annoying.
+- 500 free build minutes/month (this image builds in ~3, so plenty).
+- Rollback: Render dashboard → Deploys → *Rollback* on any previous deploy.
+
+---
+
 ## 4. Supabase production checklist
 
 Do these in the [dashboard](https://supabase.com/dashboard) before going live:
