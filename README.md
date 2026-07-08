@@ -87,6 +87,11 @@ Creates a `DEMO` project with ~20 issues and three users
 | `pnpm gen:types` | Regenerate `src/lib/database.types.ts` from the linked project |
 | `pnpm seed` | Seed demo users/project/issues (needs service role key) |
 
+## Deployment
+
+See [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) — production Docker image (nginx)
+and step-by-step AWS deployment via ECR + App Runner (or ECS Fargate).
+
 ## Architecture notes
 
 - **No custom backend** — the client talks to Supabase directly; every table has
